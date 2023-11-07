@@ -1,11 +1,12 @@
 package edu.temple.funwithintents
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : AppCompatActivity() {
+class   MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -15,6 +16,13 @@ class MainActivity : AppCompatActivity() {
 
         // When the user clicks this button, share the text
         findViewById<ImageButton>(R.id.shareImageButton).setOnClickListener {
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
+                type = "text/plain"
+            }
+
+            startActivity(Intent.createChooser(sendIntent, null))
 
         }
     }
